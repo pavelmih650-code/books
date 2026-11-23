@@ -1,0 +1,6 @@
+{
+  "name": "Ubuntu XFCE Desktop",
+  "image": "lcrmaster/ubuntu-xfce-vnc:latest",
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y kid3-qt wget xz-utils && wget -O tg.tar.xz https://telegram.org && tar -xf tg.tar.xz && sudo mv Telegram /opt/ && sudo ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop && rm tg.tar.xz",
+  "forwardPorts": [6901]
+}
