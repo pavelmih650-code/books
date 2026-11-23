@@ -1,13 +1,14 @@
 {
   "name": "Ubuntu XFCE Workspace",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-  "postCreateCommand": "sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y xfce4 xfce4-goodies tigervnc-standalone-server novnc websockify kid3-qt wget xz-utils dbus-x11 && wget -O tg.tar.xz https://telegram.org/dl/desktop/linux && tar -xf tg.tar.xz && sudo mv Telegram /opt/ && sudo ln -sf /opt/Telegram/Telegram /usr/local/bin/telegram-desktop && rm tg.tar.xz",
-  "postStartCommand": "vncserver :1 -geometry 1280x720 -depth 24 -securitytypes None >/dev/null 2>&1 || true; pkill -f websockify || true; nohup websockify --web=/usr/share/novnc/ 6080 localhost:5901 >/dev/null 2>&1 &",
+  "postCreateCommand": "sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y xfce4 xfce4-goodies tigervnc-standalone-server novnc websockify kid3-qt wget xz-utils dbus-x11 && sudo ln -sf /usr/share/novnc/vnc_lite.html /usr/share/novnc/index.html && wget -O tg.tar.xz https://telegram.org/dl/desktop/linux && tar -xf tg.tar.xz && sudo mv Telegram /opt/ && sudo ln -sf /opt/Telegram/Telegram /usr/local/bin/telegram-desktop && rm tg.tar.xz",
+  "postStartCommand": "sudo ln -sf /usr/share/novnc/vnc_lite.html /usr/share/novnc/index.html; vncserver :1 -geometry 1280x720 -depth 24 -securitytypes None >/dev/null 2>&1 || true; pkill -f websockify || true; nohup websockify --web=/usr/share/novnc/ 6080 localhost:5901 >/dev/null 2>&1 &",
   "forwardPorts": [6080],
   "portsAttributes": {
     "6080": {
       "label": "Desktop",
-      "visibility": "public"
+      "visibility": "public",
+      "onAutoForward": "openBrowser"
     }
   }
 }
