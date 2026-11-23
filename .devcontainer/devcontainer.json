@@ -1,7 +1,0 @@
-{
-  "name": "Ubuntu XFCE Workspace",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-  "postCreateCommand": "sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y xfce4 xfce4-goodies tigervnc-standalone-server novnc websockify kid3-qt wget xz-utils dbus-x11 && wget -O tg.tar.xz https://telegram.org/dl/desktop/linux && tar -xf tg.tar.xz && sudo mv Telegram /opt/ && sudo ln -l| /usr/local/bin/telegram-desktop /opt/Telegram/Telegram && rm tg.tar.xz",
-  "postStartCommand": "vncserver -kill :1 >/dev/null 2>&1 || true && echo '#!/bin/sh\nunset SESSION_MANAGER\nunset DB_SESSION_BUS_ADDRESS\nexec startxfce4 &' > ~/.vnc/xstartup && chmod +x ~/.vnc/xstartup && vncserver :1 -geometry 1280x720 -depth 24 -securitytypes None && nohup websockify --web=/usr/share/novnc/ 6080 localhost:5901 >/dev/null 2>&1 &",
-  "forwardPorts": [6080]
-}
